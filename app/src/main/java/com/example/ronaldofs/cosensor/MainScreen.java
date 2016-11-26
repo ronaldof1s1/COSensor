@@ -1,6 +1,8 @@
 package com.example.ronaldofs.cosensor;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuInflater;
@@ -11,21 +13,21 @@ import android.widget.TextView;
 
 public class MainScreen extends MenuActivity {
 
-    public String actualPPMValue;
-    public String thresholdValue;
+    private static int actualPPMValue = 2;
+    private static int thresholdValue = 3;
+    TextView actualPPM;
+    TextView threshold;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-        actualPPMValue = "" + 2;
-        thresholdValue = "" + 3;
-
-        TextView actualPPM = (TextView)findViewById(R.id.actualPPM);
-        TextView threshold = (TextView)findViewById(R.id.thresholdValue);
-        actualPPM.setText(actualPPMValue);
-        threshold.setText(thresholdValue);
+        actualPPM = (TextView)findViewById(R.id.actualPPM);
+        threshold = (TextView)findViewById(R.id.thresholdValue);
+        actualPPM.setText("" + actualPPMValue);
+        threshold.setText("" + thresholdValue);
 
 //        Menu menu = new Menu(this);
 
@@ -39,13 +41,34 @@ public class MainScreen extends MenuActivity {
             }
         });
 
+        handler = new Handler();
+        handler.post(updater);
+//
+    }
 
+    public Runnable updater = new Runnable() {
+        public void run() {
+            mainLoop();
+            handler.postDelayed(this, 1000);
+        }
+    };
+
+    private void mainLoop() {
+        actualPPM.setText("" + actualPPMValue);
+        threshold.setText("" + thresholdValue);
+
+        if(actualPPMValue > thresholdValue){
+            actualPPM.setTextColor(Color.RED);
+        }
     }
 
 
-    public void changeThreshold(MenuItem item){
-
-        Intent i = new Intent(getApplicationContext(), ChangeThreshold.class);
-        startActivity(i);
+    public static void setThreshold(int value){
+        thresholdValue = value;
     }
+
+    public static void setActualPPM(int value){
+        actualPPMValue = value;
+    }
+
 }
