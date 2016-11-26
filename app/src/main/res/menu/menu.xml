@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/changeThreshold"
+        android:title="Change Threshold"/>
+    <item android:id="@+id/help"
+        android:title="item2" />
+</menu>
