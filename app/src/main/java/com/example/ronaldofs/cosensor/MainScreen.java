@@ -60,6 +60,12 @@ public class MainScreen extends MenuActivity {
         if(actualPPMValue > thresholdValue){
             actualPPM.setTextColor(Color.RED);
         }
+        else if (actualPPMValue > 0.8 * thresholdValue){
+            actualPPM.setTextColor(Color.YELLOW);
+        }
+        else{
+            actualPPM.setTextColor(Color.GREEN);
+        }
     }
 
 

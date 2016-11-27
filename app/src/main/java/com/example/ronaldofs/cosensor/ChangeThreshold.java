@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +24,6 @@ public class ChangeThreshold extends MenuActivity{
         manual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ChangeThreshold.this, "YOU CLICKED ON MANUAL", Toast.LENGTH_SHORT).show();
                 manualClick();
             }
         });
@@ -30,7 +31,6 @@ public class ChangeThreshold extends MenuActivity{
         assisted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ChangeThreshold.this, "YOU CLICKED ON assisted", Toast.LENGTH_SHORT).show();
                 assistedClick();
             }
         });
@@ -45,20 +45,31 @@ public class ChangeThreshold extends MenuActivity{
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
         input.setLayoutParams(lp);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
         dialog.setView(input);
         dialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                int value = Integer.parseInt(input.getText().toString());
-                MainScreen.setThreshold(value);
+
+                Editable eValue = input.getText();
+                Toast.makeText(ChangeThreshold.this, eValue.toString(), Toast.LENGTH_SHORT).show();
+                if(input.getText() != null){
+                    int value = Integer.parseInt(eValue.toString());
+                    MainScreen.setThreshold(value);
+                }
                 Intent intent = new Intent(getApplicationContext(), MainScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
+                finish();
             }
         });
         dialog.show();
     }
 
     public void assistedClick(){
-
+        Intent i = new Intent(getApplicationContext(), AssistedChangeThreshold.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(i);
+        finish();
     }
 }

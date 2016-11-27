@@ -3,5 +3,5 @@
     <item android:id="@+id/changeThreshold"
         android:title="Change Threshold"/>
     <item android:id="@+id/help"
-        android:title="item2" />
+        android:title="Help" />
 </menu>
