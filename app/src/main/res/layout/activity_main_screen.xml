@@ -58,5 +58,18 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="14dp"
-        android:layout_marginEnd="14dp" />
+        android:layout_marginEnd="14dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="Emission Now"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:id="@+id/actualPPMText"
+        android:textStyle="normal|bold"
+        android:textSize="24sp"
+        android:layout_below="@+id/actualPPM"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center" />
 </RelativeLayout>

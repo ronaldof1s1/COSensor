@@ -28,15 +28,20 @@ public class MenuActivity extends AppCompatActivity {
         Intent i;
         switch (item.getItemId()){
             case R.id.changeThreshold:
-                Toast.makeText(this, "clicked on threshold", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "clicked on threshold", Toast.LENGTH_SHORT).show();
                 i = new Intent(getBaseContext() , ChangeThreshold.class);
                 startActivity(i);
                 return true;
             case R.id.help:
                 return true;
+            case R.id.manageBluetooth:
+                i = new Intent(getBaseContext(), BluetoothActivity.class);
+                startActivity(i);
             default:
                 return super.onOptionsItemSelected(item);
         }
 
     }
+
+
 }
