@@ -1,17 +1,10 @@
 package com.example.ronaldofs.cosensor;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.ContextWrapper;
 import android.os.AsyncTask;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
-
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,17 +15,11 @@ import java.util.UUID;
 public class BluetoothManager {
     boolean connectSuccess = true;
     BluetoothAdapter mBluetoothAdapter;
-    //    Set<BluetoothDevice> devicesFound;
-//    final int BLUETOOTH_ENABLED_REQUEST_CODE = 1;
-//    ArrayAdapter devicesAdapter;
     BluetoothSocket btSocket = null;
     private boolean isBtConnected = false;
-
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     final int CONNECTION_RESULT_OK = 1;
-
     final int CONNECTION_RESULT_FAILED = -1;
-
 
     public BluetoothAdapter getmBluetoothAdapter() {
         return mBluetoothAdapter;
@@ -46,7 +33,6 @@ public class BluetoothManager {
     public Set<BluetoothDevice> getBondedDevices() {
         Set<BluetoothDevice> bondedSet = mBluetoothAdapter.getBondedDevices();
         return bondedSet;
-
     }
 
     public int connectToDevice(String deviceAddress) {
@@ -64,33 +50,41 @@ public class BluetoothManager {
 
     public int getActualPPM() {
         int actualPPM = 0;
-        byte[] bytes = new byte[4];
-        try {
-            actualPPM = btSocket.getInputStream().read(bytes);
 
-            System.out.println("could not get ppm");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
+        try {
+            String s = "";
+            int c;
+
+            while(btSocket.getInputStream().available() > 0){
+                c = btSocket.getInputStream().read();
+                s += (char)c;
             }
+
+            if (!s.isEmpty()){
+                actualPPM = Integer.parseInt(s);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("could not get ppm");
         }
+
         return actualPPM;
     }
 
     public void setThreshold(int thresholdValue) {
         try {
-            btSocket.getOutputStream().write(thresholdValue);
+            String s = String.valueOf(thresholdValue);
+            byte b;
+
+            for( char c : s.toCharArray()){
+                b = (byte)c;
+                btSocket.getOutputStream().write(b);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("could not send threshold");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
-            }
         }
     }
 
@@ -132,5 +126,19 @@ public class BluetoothManager {
             }
         }
     }
+
+//    private void disconnect(){
+//        if (btSocket!=null) //If the btSocket is busy
+//        {
+//            try
+//            {
+//                btSocket.close(); //close connection
+//            }
+//            catch (IOException e)
+//            {
+//                Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();}
+//        }
+//        finish();
+//    }
 
 }

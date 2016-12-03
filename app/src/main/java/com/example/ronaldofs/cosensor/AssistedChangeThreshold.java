@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class AssistedChangeThreshold extends AppCompatActivity {
 
@@ -49,42 +48,16 @@ public class AssistedChangeThreshold extends AppCompatActivity {
 
         int actualPPM = 0;
 
+        yearValue = getYearValue(carYearValue);
+        fuelValue = getFuelValue(fuelTypeName);
 
-        if(carYearValue <= 1979){
-            yearValue = 0;
-        }
-        else if(carYearValue >= 1980 && carYearValue <= 1988 ){
-            yearValue = 1;
-        }
-        else if(carYearValue == 1989){
-            yearValue = 2;
-        }
-        else if(carYearValue == 1990 || carYearValue == 1991){
-            yearValue = 3;
-        }
-        else if (carYearValue >= 1992 && carYearValue <= 1996){
-            yearValue = 4;
-        }
-        else if (carYearValue >= 1996 && carYearValue <= 2002){
-            yearValue = 5;
-        }
-        else if (carYearValue >= 2003 && carYearValue <= 2005){
-            yearValue = 6;
-        }
-        else{
-            yearValue = 7;
-        }
+        actualPPM = calculate(yearValue, fuelValue);
 
-        if (fuelTypeName.equals("Gasoline")){
-            fuelValue = 0;
-        }
-        else if(fuelTypeName.equals("Alcohool")){
-            fuelValue = 1;
-        }
-        else{
-            fuelValue = 2;
-        }
+        return actualPPM;
+    }
 
+    private int calculate(int yearValue, int fuelValue) {
+        int actualPPM = -1;
         switch (yearValue){
             case 0:
                 switch (fuelValue){
@@ -207,11 +180,54 @@ public class AssistedChangeThreshold extends AppCompatActivity {
                 }
                 break;
             default:
+                actualPPM = -1;
                 break;
+        }
+        return actualPPM;
+    }
 
+    public int getYearValue(int carYearValue){
+        int yearValue;
+
+        if(carYearValue <= 1979){
+            yearValue = 0;
+        }
+        else if(carYearValue >= 1980 && carYearValue <= 1988 ){
+            yearValue = 1;
+        }
+        else if(carYearValue == 1989){
+            yearValue = 2;
+        }
+        else if(carYearValue == 1990 || carYearValue == 1991){
+            yearValue = 3;
+        }
+        else if (carYearValue >= 1992 && carYearValue <= 1996){
+            yearValue = 4;
+        }
+        else if (carYearValue >= 1996 && carYearValue <= 2002){
+            yearValue = 5;
+        }
+        else if (carYearValue >= 2003 && carYearValue <= 2005){
+            yearValue = 6;
+        }
+        else{
+            yearValue = 7;
         }
 
+        return yearValue;
+    }
 
-        return actualPPM;
+    public int getFuelValue(String fuelTypeName){
+        int fuelValue;
+        if (fuelTypeName.equals("Gasoline")){
+            fuelValue = 0;
+        }
+        else if(fuelTypeName.equals("Alcohool")){
+            fuelValue = 1;
+        }
+        else{
+            fuelValue = 2;
+        }
+        return fuelValue;
     }
 }

@@ -28,7 +28,6 @@ public class MenuActivity extends AppCompatActivity {
         Intent i;
         switch (item.getItemId()){
             case R.id.changeThreshold:
-//                Toast.makeText(this, "clicked on threshold", Toast.LENGTH_SHORT).show();
                 i = new Intent(getBaseContext() , ChangeThreshold.class);
                 startActivity(i);
                 return true;

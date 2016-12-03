@@ -72,34 +72,34 @@ public class GoogleMaps extends AppCompatActivity implements OnMapReadyCallback,
 
         getPermissions();
 
-//        initPlaceAPI();
+        initPlaceAPI();
     }
 
-//    private void initPlaceAPI() {
-//
-//
-//        PlacePicker.IntentBuilder pickerBuilder = new PlacePicker.IntentBuilder();
-//
-//        try {
-//            startActivityForResult(pickerBuilder.build(this), PLACE_PICKER_REQUEST_CODE);
-//        } catch (GooglePlayServicesRepairableException e) {
-//            e.printStackTrace();
-//        } catch (GooglePlayServicesNotAvailableException e) {
-//            e.printStackTrace();
-//        }
-//
-//        PlaceAutocomplete.IntentBuilder autoCompleteBuilder;
-//        autoCompleteBuilder = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY);
-//
-//        try {
-//            startActivityForResult(autoCompleteBuilder.build(this), PLACE_AUTOCOMPLETE_REQUEST_CODE);
-//        } catch (GooglePlayServicesRepairableException e) {
-//            e.printStackTrace();
-//        } catch (GooglePlayServicesNotAvailableException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+    private void initPlaceAPI() {
+
+
+        PlacePicker.IntentBuilder pickerBuilder = new PlacePicker.IntentBuilder();
+
+        try {
+            startActivityForResult(pickerBuilder.build(this), PLACE_PICKER_REQUEST_CODE);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+
+        PlaceAutocomplete.IntentBuilder autoCompleteBuilder;
+        autoCompleteBuilder = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY);
+
+        try {
+            startActivityForResult(autoCompleteBuilder.build(this), PLACE_AUTOCOMPLETE_REQUEST_CODE);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
