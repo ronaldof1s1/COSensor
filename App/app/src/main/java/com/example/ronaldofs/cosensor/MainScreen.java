@@ -85,7 +85,7 @@ public class MainScreen extends MenuActivity {
     public Runnable updater = new Runnable() {
         public void run() {
             mainLoop();
-            handler.postDelayed(this, 100 * 1);
+            handler.postDelayed(this, 1000 * 10);
 
         }
     };
@@ -100,7 +100,7 @@ public class MainScreen extends MenuActivity {
                 }
             }
             else{
-                Toast.makeText(this, "bluetooth disconnected", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "bluetooth disconnected", Toast.LENGTH_SHORT).show();
             }
         }
 
