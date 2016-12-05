@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -85,7 +86,7 @@ public class MainScreen extends MenuActivity {
     public Runnable updater = new Runnable() {
         public void run() {
             mainLoop();
-            handler.postDelayed(this, 1000 * 10);
+            handler.postDelayed(this, 1000 * 1);
 
         }
     };
@@ -95,6 +96,7 @@ public class MainScreen extends MenuActivity {
             if(btManager.btSocket.isConnected()){
                 setActualPPM(btManager.getActualPPM());
                 if (thresholdHasChanged){
+                    Log.e("mainloop", "mainLoop: threshold has changed");
                     btManager.setThreshold(thresholdValue);
                     thresholdHasChanged = false;
                 }
@@ -138,6 +140,12 @@ public class MainScreen extends MenuActivity {
                 startActivity(intent);
                 clickedMapsButton = true;
                 handler.post(updater);
+            }
+        });
+        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                clickedMapsButton = true;
             }
         });
         alertDialog.show();

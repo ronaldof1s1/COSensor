@@ -81,7 +81,7 @@ public class BluetoothManager {
                 b = (byte)c;
                 btSocket.getOutputStream().write(b);
             }
-
+            btSocket.getOutputStream().flush();
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("could not send threshold");
