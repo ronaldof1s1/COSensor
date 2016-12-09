@@ -32,7 +32,8 @@
         android:layout_toRightOf="@+id/CarYearText"
         android:layout_toEndOf="@+id/CarYearText"
         android:layout_marginLeft="33dp"
-        android:layout_marginStart="33dp" />
+        android:layout_marginStart="33dp"
+        android:textStyle="normal|bold" />
 
     <Spinner
         android:layout_width="match_parent"
@@ -53,7 +54,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="107dp"
         android:textSize="30sp"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:background="@color/m_colorPrimaryDark" />
 
     <TextView
         android:text="Fuel Type:"

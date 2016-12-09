@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="m_Primary_material_dark">#ce00c30d</color>
+    <color name="m_colorPrimary">#26de39</color>
+    <color name="m_colorBackground">#d8d9fddb</color>
+    <color name="m_colorForeground">#ff0000</color>
+    <color name="m_colorPrimaryDark">#cc009619</color>
+    <color name="m_colorAccent">#009a1c</color>
+    <color name="m_windowBackground">#d8009f09</color>
 </resources>

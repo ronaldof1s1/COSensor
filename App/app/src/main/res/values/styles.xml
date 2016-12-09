@@ -8,4 +8,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="COSensor" parent="Theme.AppCompat" >
+        <item name="colorPrimary">@color/m_colorPrimary</item>
+        <item name="android:colorBackground">@color/m_colorBackground</item>
+        <item name="android:colorForeground">@color/m_colorForeground</item>
+        <item name="colorPrimaryDark">@color/m_colorPrimaryDark</item>
+        <item name="colorAccent">@color/m_colorAccent</item>
+        <item name="actionOverflowMenuStyle">@style/CMOptionsMenu</item>
+        <item name="buttonStyle">@style/m_ButtonStyle</item>
+    </style>
+
+    <style name="CMOptionsMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:popupBackground">@color/m_colorAccent</item>
+    </style>
+    <style name="m_ButtonStyle" parent="Widget.AppCompat.Button">
+
+    </style>
+
 </resources>

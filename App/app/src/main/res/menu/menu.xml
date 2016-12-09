@@ -4,6 +4,4 @@
         android:title="Change Threshold"/>
     <item android:id="@+id/manageBluetooth"
         android:title="Connect"/>
-    <item android:id="@+id/help"
-        android:title="Help" />
 </menu>

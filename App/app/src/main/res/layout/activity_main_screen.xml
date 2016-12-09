@@ -13,7 +13,6 @@
     tools:context="com.example.ronaldofs.cosensor.MainScreen">
 
 
-
     <TextView
         android:text="actualPPM"
         android:layout_width="wrap_content"
@@ -23,30 +22,6 @@
         android:id="@+id/actualPPM"
         android:textSize="50sp"
         android:textColor="@color/cast_intro_overlay_background_color" />
-
-    <Button
-        android:text="goToMaps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/goToMaps"
-        android:layout_marginTop="73dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="14dp"
-        android:layout_marginStart="14dp" />
-
-    <TextView
-        android:text="thresholdValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/thresholdValue"
-        android:textSize="30sp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/goToMaps"
-        android:layout_alignTop="@+id/goToMaps"
-        android:textColor="@android:color/holo_orange_dark" />
 
     <TextView
         android:text="Threshold:"
@@ -59,7 +34,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="14dp"
         android:layout_marginEnd="14dp"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textStyle="normal|bold" />
 
     <TextView
         android:text="Emission Now"
@@ -72,5 +48,108 @@
         android:layout_below="@+id/actualPPM"
         android:layout_centerHorizontal="true"
         android:textAlignment="center" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Threshold"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/common_google_signin_btn_text_dark_focused">
+
+            <TextView
+                android:text="thresholdValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/thresholdValue"
+                android:textSize="30sp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@+id/goToMaps"
+                android:layout_alignTop="@+id/goToMaps"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_marginBottom="3px"
+                android:layout_marginLeft="3px"
+                android:layout_marginRight="3px"
+                android:layout_marginTop="3px"
+                android:background="@color/m_colorBackground" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:text="LV: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actualPPMText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="44dp"
+        android:id="@+id/levelText"
+        android:textStyle="normal|bold"
+        android:textSize="24sp" />
+
+    <TextView
+        android:text="XP: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/XPTextView"
+        android:layout_marginTop="28dp"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/levelText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/XPTextView"
+        android:layout_toRightOf="@+id/XPTextView"
+        android:layout_toEndOf="@+id/XPTextView"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:id="@+id/XPValueTextView"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/levelValueTextView"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:layout_above="@+id/XPTextView"
+        android:layout_alignLeft="@+id/XPValueTextView"
+        android:layout_alignStart="@+id/XPValueTextView" />
+
+    <ProgressBar
+        style="@android:style/Widget.Material.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/XPBar"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@+id/XPTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/goToMaps"
+        android:background="@color/m_colorPrimaryDark"
+        android:text="Go to Maps"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/tableLayout4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
