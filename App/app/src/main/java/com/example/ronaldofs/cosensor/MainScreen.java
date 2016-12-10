@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainScreen extends MenuActivity {
@@ -20,6 +21,9 @@ public class MainScreen extends MenuActivity {
     static TextView threshold;
     private Handler handler;
     final int BLUETOOTH_ENABLED_REQUEST_CODE = 1;
+    ProgressBar bar;
+    TextView xpValue;
+
     BluetoothAdapter mBluetoothAdapter;
     static BluetoothManager btManager;
     static boolean isConnected = false;
@@ -30,17 +34,19 @@ public class MainScreen extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-        actualPPM = (TextView)findViewById(R.id.actualPPM);
-        threshold = (TextView)findViewById(R.id.thresholdValue);
+        actualPPM = (TextView) findViewById(R.id.actualPPM);
+        threshold = (TextView) findViewById(R.id.thresholdValue);
         actualPPM.setText("" + actualPPMValue);
         threshold.setText("" + thresholdValue);
+        bar = (ProgressBar) findViewById(R.id.XPBar);
+        xpValue = (TextView) findViewById(R.id.XPValueTextView);
 
-        Button goToMaps = (Button)findViewById(R.id.goToMaps);
-        goToMaps.setOnClickListener(new View.OnClickListener()  {
+        Button goToMaps = (Button) findViewById(R.id.goToMaps);
+        goToMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent i =  new Intent(getApplicationContext(), GoogleMaps.class);
+                Intent i = new Intent(getApplicationContext(), GoogleMaps.class);
                 startActivity(i);
             }
         });
@@ -60,7 +66,7 @@ public class MainScreen extends MenuActivity {
 
     private void startBluetooth() {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (!mBluetoothAdapter.isEnabled()){
+        if (!mBluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, BLUETOOTH_ENABLED_REQUEST_CODE);
         }
@@ -91,42 +97,39 @@ public class MainScreen extends MenuActivity {
     };
 
     private void mainLoop() {
-        if (btManager.btSocket != null){
-            if(btManager.btSocket.isConnected()){
+        if (btManager.btSocket != null) {
+            if (btManager.btSocket.isConnected()) {
                 setActualPPM(btManager.getActualPPM());
-                if (thresholdHasChanged){
+                if (thresholdHasChanged) {
                     Log.e("mainloop", "mainLoop: threshold has changed");
                     btManager.setThreshold(thresholdValue);
                     thresholdHasChanged = false;
                 }
-            }
-            else{
+            } else {
 //                Toast.makeText(this, "bluetooth disconnected", Toast.LENGTH_SHORT).show();
             }
         }
+        Log.d("newThread", "thread not created");
 
-        if(actualPPMValue > thresholdValue){
+        if (actualPPMValue > thresholdValue) {
             actualPPM.setTextColor(Color.RED);
             if (clickedMapsButton) {
-                synchronized (this) {
-                    alertUser();
-                }
+                alertUser();
             }
-        }
-        else if (actualPPMValue > 0.8 * thresholdValue){
+        } else if (actualPPMValue > 0.8 * thresholdValue) {
             actualPPM.setTextColor(Color.YELLOW);
             if (clickedMapsButton) {
-                synchronized (this) {
-                    alertUser();
-                }
+                alertUser();
             }
-        }
-        else{
+        } else {
             actualPPM.setTextColor(Color.GREEN);
         }
+
+        bar.setProgress(Integer.parseInt(xpValue.getText().toString()));
+
     }
 
-    private void alertUser() {
+    private synchronized void alertUser() {
         clickedMapsButton = false;
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("ALERT");
@@ -151,14 +154,14 @@ public class MainScreen extends MenuActivity {
     }
 
 
-    synchronized public static void setThreshold(int value){
+    synchronized public static void setThreshold(int value) {
         thresholdValue = (value <= 60000 && value > 0) ? value : 60000;
         threshold.setText(thresholdValue + "");
         thresholdHasChanged = true;
 
     }
 
-    synchronized public static void setActualPPM(int value){
+    synchronized public static void setActualPPM(int value) {
         actualPPMValue = (value > 0) ? value : actualPPMValue;
         actualPPM.setText(actualPPMValue + "");
     }

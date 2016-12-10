@@ -29,8 +29,6 @@ public class MenuActivity extends AppCompatActivity {
                 i = new Intent(getBaseContext() , ChangeThreshold.class);
                 startActivity(i);
                 return true;
-            case R.id.help:
-                return true;
             case R.id.manageBluetooth:
                 i = new Intent(getBaseContext(), BluetoothActivity.class);
                 startActivity(i);
