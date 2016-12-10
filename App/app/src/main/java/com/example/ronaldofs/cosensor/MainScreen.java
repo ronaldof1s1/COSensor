@@ -23,6 +23,7 @@ public class MainScreen extends MenuActivity {
     final int BLUETOOTH_ENABLED_REQUEST_CODE = 1;
     ProgressBar bar;
     TextView xpValue;
+    float XP;
 
     BluetoothAdapter mBluetoothAdapter;
     static BluetoothManager btManager;
@@ -122,10 +123,19 @@ public class MainScreen extends MenuActivity {
                 alertUser();
             }
         } else {
-            actualPPM.setTextColor(Color.GREEN);
+            actualPPM.setTextColor(Color.argb(200,0,101,17));
+            TextView lv = (TextView) findViewById(R.id.levelValueTextView);
+            int level = Integer.parseInt(lv.getText().toString());
+            XP = (float) (1.0/level);
+            XP += Float.parseFloat(xpValue.getText().toString());
+            xpValue.setText(String.valueOf(XP));
+            if (XP >= 100){
+                lv.setText(String.valueOf(level + 1));
+                xpValue.setText("0");
+            }
         }
-
-        bar.setProgress(Integer.parseInt(xpValue.getText().toString()));
+        XP = 0;
+        bar.setProgress((int) Float.parseFloat(xpValue.getText().toString()));
 
     }
 
